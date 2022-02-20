@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             Visual="Material"
+             x:Class="App_news_Androind.View.IntroductPage">
+   
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="logobanner.jpg"
+               Aspect="AspectFill"/>
+            <StackLayout Margin="20">
+                <Image Source="sample.jpg"
+                   HeightRequest="100"
+                   Aspect="AspectFill"/>
+                <Label Text="TRANG TIN TỨC ĐIỆN TỬ VIỄN THÔNG"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Red"                       
+                       FontAttributes="Bold"
+                       FontSize="20">
+                </Label>
+                <Label Text="NHÓM CÔNG KIỀN NGHĨA"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Black"                       
+                       FontSize="18">
+                </Label>
+                <Label Text="XIN CHÀO"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Black"
+                       Margin="0,80,0,0"
+                       FontSize="20">
+                </Label>
+                <Label Text="{Binding DisplayName}"
+                       HorizontalTextAlignment="Center"
+                       TextColor="Black"                      
+                       FontAttributes="Bold"
+                       FontSize="20">
+                </Label>
+                <Label Text="{Binding ViTri}"
+                       HorizontalTextAlignment="Center"
+                       TextColor="DarkGray"                     
+                       FontAttributes="Italic"
+                       FontSize="Medium">
+                </Label>
+                
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App_news_Androind.ViewModel"
+             x:Class="App_news_Androind.View.TinTucTuyenSinh">
+    <ContentPage.BindingContext>
+        <local:TinTucViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding UserDisplayName}"></Label>
+            <ListView RowHeight="100" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1"  x:Name="List5" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height=".3*" />
+                                <RowDefinition Height=".7*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*" />
+                                <ColumnDefinition Width=".8*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image HorizontalOptions="Start" VerticalOptions="Start"  Source="{Binding imgn}" Grid.RowSpan="2" />
+                            <Label HorizontalOptions="Start" Text="{Binding DisplayName}" Grid.Column="1" Style="{DynamicResource TitleStyle}" />
+                            <Label HorizontalOptions="Start" Text="{Binding NgayDang}" Grid.Row="1" Grid.Column="1" Style="{DynamicResource BodyStyle}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:App_news_Androind.ViewModel"
+             x:Class="App_news_Androind.View.LoginPage">
+    <ContentPage.BindingContext>
+        <local:TaiKhoanViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Image Source="logoSETHUST.png" 
+               WidthRequest="120" 
+               Margin="0,0,0,60"/>
+            <Label Text="Tên đăng nhập" 
+               FontSize="Medium" 
+               FontAttributes="Bold"/>
+            <Entry Placeholder="Username" 
+               Text="{Binding UserName}"
+               FontSize="Medium" />
+            <Label Text="Mật khẩu" 
+               FontSize="Medium" 
+               FontAttributes="Bold"/>
+            <Entry Placeholder="Password"
+                   Text="{Binding Password}"
+               IsPassword="True" />
+            <Button 
+                Command="{Binding SubmitCommand}"
+                Margin="0,10,0,0"
+                Text="Đăng nhập" 
+                BackgroundColor="#003DCB" 
+                TextColor="#FFF" 
+                HeightRequest="50"/>
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="Center"
+                         Margin="20">
+                <Label Text="Chưa có tài khoản?"/>
+                <Label Text="Đăng ký"/>
+            </StackLayout>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

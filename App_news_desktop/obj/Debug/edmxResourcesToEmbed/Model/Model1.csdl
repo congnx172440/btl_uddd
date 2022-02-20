@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QlTinTucModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BinhLuan">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Content" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdUser" Type="Int64" Nullable="false" />
+    <Property Name="IdTinTuc" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="TinTuc" Relationship="Self.FK_BinhLuan_0_0" FromRole="BinhLuan" ToRole="TinTuc" />
+    <NavigationProperty Name="User" Relationship="Self.FK_BinhLuan_1_0" FromRole="BinhLuan" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="LoaiTin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TinTucs" Relationship="Self.FK_TinTuc_1_0" FromRole="LoaiTin" ToRole="TinTuc" />
+  </EntityType>
+  <EntityType Name="Quyen">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_0_0" FromRole="Quyen" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="TinTuc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Content" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="imgn" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="IdUser" Type="Int64" Nullable="false" />
+    <Property Name="IdLoaiTin" Type="Int64" Nullable="false" />
+    <Property Name="NgayDang" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="BinhLuans" Relationship="Self.FK_BinhLuan_0_0" FromRole="TinTuc" ToRole="BinhLuan" />
+    <NavigationProperty Name="LoaiTin" Relationship="Self.FK_TinTuc_1_0" FromRole="TinTuc" ToRole="LoaiTin" />
+    <NavigationProperty Name="User" Relationship="Self.FK_TinTuc_0_0" FromRole="TinTuc" ToRole="Users" />
+    <Property Name="LinkCT" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdQuyen" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="BinhLuans" Relationship="Self.FK_BinhLuan_1_0" FromRole="Users" ToRole="BinhLuan" />
+    <NavigationProperty Name="Quyen" Relationship="Self.FK_Users_0_0" FromRole="Users" ToRole="Quyen" />
+    <NavigationProperty Name="TinTucs" Relationship="Self.FK_TinTuc_0_0" FromRole="Users" ToRole="TinTuc" />
+    <Property Name="ViTri" Type="String" Nullable="false" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+    <Property Name="imgn" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_BinhLuan_0_0">
+    <End Role="TinTuc" Type="Self.TinTuc" Multiplicity="1" />
+    <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TinTuc">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BinhLuan">
+        <PropertyRef Name="IdTinTuc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BinhLuan_1_0">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="BinhLuan" Type="Self.BinhLuan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BinhLuan">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TinTuc_1_0">
+    <End Role="LoaiTin" Type="Self.LoaiTin" Multiplicity="1" />
+    <End Role="TinTuc" Type="Self.TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiTin">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TinTuc">
+        <PropertyRef Name="IdLoaiTin" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_0_0">
+    <End Role="Quyen" Type="Self.Quyen" Multiplicity="1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quyen">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="IdQuyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TinTuc_0_0">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="TinTuc" Type="Self.TinTuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TinTuc">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QlTinTicEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BinhLuans" EntityType="Self.BinhLuan" />
+    <EntitySet Name="LoaiTins" EntityType="Self.LoaiTin" />
+    <EntitySet Name="Quyens" EntityType="Self.Quyen" />
+    <EntitySet Name="TinTucs" EntityType="Self.TinTuc" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_BinhLuan_0_0" Association="Self.FK_BinhLuan_0_0">
+      <End Role="TinTuc" EntitySet="TinTucs" />
+      <End Role="BinhLuan" EntitySet="BinhLuans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BinhLuan_1_0" Association="Self.FK_BinhLuan_1_0">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BinhLuan" EntitySet="BinhLuans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TinTuc_1_0" Association="Self.FK_TinTuc_1_0">
+      <End Role="LoaiTin" EntitySet="LoaiTins" />
+      <End Role="TinTuc" EntitySet="TinTucs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_0_0" Association="Self.FK_Users_0_0">
+      <End Role="Quyen" EntitySet="Quyens" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TinTuc_0_0" Association="Self.FK_TinTuc_0_0">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TinTuc" EntitySet="TinTucs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"            
+             xmlns:view="clr-namespace:App_news_Androind.View" 
+       x:Class="App_news_Androind.MainPage">
+
+    <Shell.FlyoutHeader>
+        <Grid HorizontalOptions="FillAndExpand"
+              VerticalOptions="FillAndExpand">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="Auto"/>
+
+            </Grid.RowDefinitions>
+
+            <Image Aspect="AspectFill"
+                   Source="header.png"
+                   Grid.ColumnSpan="5"
+                   Grid.RowSpan="4"
+                   Opacity="0.6"
+                   Grid.Column="0"
+                   Grid.Row="0"/>
+
+            <Image Source="{Binding imgn}"
+                   Aspect="AspectFill"
+                   Grid.Column="1"
+                   Grid.Row="1"
+                   WidthRequest="80"   
+                   HeightRequest="80"
+                   HorizontalOptions="Start"
+                   VerticalOptions="End">
+                <Image.Clip>
+                    <EllipseGeometry
+                Center="40,40"
+                RadiusX="40"
+                RadiusY="40"/>
+                </Image.Clip>
+            </Image>
+
+
+            <StackLayout VerticalOptions="CenterAndExpand" 
+                         Grid.Row="1" 
+                         Margin="10,0,0,0"
+                         Grid.Column="2"
+                         Grid.ColumnSpan="3" 
+                         Orientation="Vertical">
+                <Label HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       TextColor="#000"
+                       Text="{Binding DisplayName}"/>
+
+                <Label HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       TextColor="#000" 
+                       Text="{Binding ViTri}"/>
+            </StackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+
+    <FlyoutItem Title="MyTabApp"
+                Shell.TabBarIsVisible="False"
+                FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent Title="Trang chủ"
+                      Route="trangchu"
+                      IsTabStop="True"
+                      Icon="trangchu.png"
+                      ContentTemplate="{DataTemplate view:IntroductPage}"/>
+
+        <ShellContent Title="Tin Tức Đào Tạo"
+                      Route="tintucdaotao"
+                      IsTabStop="True"
+                      Icon="tintucdaotao.png"
+                      ContentTemplate="{DataTemplate view:TinTucDaoTao}"/>
+
+        <ShellContent Title="Tin Tức Hoạt Động"
+                      Route="tintuchoatdong"
+                      IsTabStop="True"
+                      Icon="tintuchoatdong.png"
+                      ContentTemplate="{DataTemplate view:TinTucHoatDong}"/>
+
+        <ShellContent Title="Nghiên Cứu Khoa Học"
+                      Route="tintucnghiencuu"
+                      IsTabStop="True"
+                      Icon="tintucnghiencuu.png"
+                      ContentTemplate="{DataTemplate view:TinTucNghienCuu}"/>
+        
+        <ShellContent Title="Tuyển Dụng"
+                      Route="tintuctuyendung"
+                      IsTabStop="True"
+                      Icon="tintuctuyendung.png"
+                      ContentTemplate="{DataTemplate view:TinTucTuyenDung}"/>
+
+        <ShellContent Title="Tuyển Sinh"
+                      Route="tintuctuyensinh"
+                      IsTabStop="True"
+                      Icon="tintuctuyensinh.png"
+                      ContentTemplate="{DataTemplate view:TinTucTuyenSinh}"/>
+        
+        <ShellContent Title="Đăng nhập"
+                      Route="login"
+                      Icon="login.png"
+                      FlyoutItem.IsVisible="{Binding Login}"
+                      IsTabStop="True"
+                      ContentTemplate="{DataTemplate view:LoginPage}"/>
+        
+        <ShellContent Title="Đăng xuất"
+                      Route="logout"
+                      Icon="logout.png"
+                      FlyoutItem.IsVisible="{Binding Logout}"
+                      IsTabStop="True"
+                      ContentTemplate="{DataTemplate view:LoginPage}"/>
+    </FlyoutItem>
+    
+</Shell>

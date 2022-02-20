@@ -1,0 +1,204 @@
+﻿<Window x:Class="App_news_desktop.DetailNews"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:App_news_desktop"
+        mc:Ignorable="d"
+        xmlns:uc="clr-namespace:App_news_desktop.UserControlN"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Height="720"
+        Width="1080"
+        WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource MainNewsVM}"
+        
+        x:Name="detailnewsWindow"
+        Title="Đọc Tin Tức" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+  
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=detailnewsWindow}" Loaded="ControlBarUC_Loaded"></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".40*"></ColumnDefinition>
+                <ColumnDefinition Width=".60*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+
+                <materialDesign:Card Height="Auto" Margin="10 10 10 10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Image
+                            Source="{Binding imgn}"
+                            Height="180"
+                            Stretch="UniformToFill"                             
+                            HorizontalAlignment="Left" />
+                        </Grid>
+                        
+                        <StackPanel Grid.Row="1" Margin="8 16 8 0">
+                            <TextBlock FontWeight="Bold" FontSize="15" 
+                                       Text="{Binding SelectedUser.DisplayName}"
+                                       />
+                            <TextBlock TextWrapping="Wrap" FontWeight="Thin" FontStyle="Italic" FontSize="12" Margin="0 5 0 0" 
+                                       Text="{Binding SelectedUser.ViTri}"
+                                       />
+                            <TextBlock
+                                Margin="0 8"
+                                FontWeight="Bold"
+                                TextWrapping="Wrap"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="13"
+                                Text="{Binding DisplayName}" />            
+                        </StackPanel>
+                        
+                        <StackPanel HorizontalAlignment="Left" Grid.Row="2" Orientation="Horizontal" Margin="8">
+                            <Button
+                                Style="{StaticResource MaterialDesignToolButton}"
+                                Width="30"
+                                Padding="2 0 2 0"
+                                IsEnabled="False"
+                                materialDesign:RippleAssist.IsCentered="True">
+                                <materialDesign:PackIcon Kind="{Binding DisplayIcon}" />
+                            </Button>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" FontSize="14" 
+                                       Text="{Binding NgayDang}"
+                                       />
+                        </StackPanel>
+                    </Grid>
+                </materialDesign:Card>
+
+            </Grid>
+            <Grid Grid.Column="1">
+                <materialDesign:Card Height="320" Margin="10 10 10 10">
+                    <ScrollViewer Name="MyScrollViewer" ScrollViewer.CanContentScroll="True">
+                    <TextBlock FontWeight="Medium" FontStyle="Italic" FontSize="12" Margin="0 5 0 0" 
+                                       Text="{Binding Content}"                                     
+                                       />
+                    </ScrollViewer>
+                </materialDesign:Card>
+            </Grid>
+            
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".40*"></ColumnDefinition>
+                <ColumnDefinition Width=".60*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <materialDesign:Card Height="150" Grid.Row="2" Margin="10 15 15 10">
+                        <Grid>
+                            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Margin="5" materialDesign:HintAssist.Hint="Nhập bình luận..." Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Button Command="{Binding ThemBinhLuanCommand}" Height="60" Content="Xác nhận" Margin="25" Width="Auto"></Button>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <StackPanel Width="640">
+                <materialDesign:Card Margin="10 10 10 10" >
+
+                    <Expander HorizontalAlignment="Center" Header="Tham khảo thêm tại">
+                        
+                        <TextBlock>           
+                            <Hyperlink  NavigateUri="{Binding LinkCT}" RequestNavigate="Hyperlink_RequestNavigate">
+                                <TextBlock FontWeight="Bold" FontStyle="Italic" FontSize="15" Margin="20 5 0 0" 
+                                       VerticalAlignment="Center" HorizontalAlignment="Left"
+                                       Text="{Binding LinkCT}"                                     
+                                       />
+                            </Hyperlink>    
+                        </TextBlock>
+                    </Expander>
+                    
+                </materialDesign:Card>
+
+                    <ListView ItemsSource="{Binding LBinhLuan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+
+                                    <ListViewItem
+                                      VerticalContentAlignment="Top"  
+                                      ScrollViewer.VerticalScrollBarVisibility="Visible"                                        
+                                      ScrollViewer.HorizontalScrollBarVisibility="Visible"                                        
+                                      ScrollViewer.CanContentScroll="True">
+                            
+                            <Grid HorizontalAlignment="Center" Margin="5" Width="Auto">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Border Width="60" Height="60" BorderBrush="White" BorderThickness="0.6">
+                                    <Border.Background>
+                                        <ImageBrush ImageSource="{Binding Users.imgn}" />
+                                    </Border.Background>
+                                </Border>
+                                
+                                
+
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock 
+                                        Text="{Binding Users.DisplayName}" TextTrimming="CharacterEllipsis" Opacity="0.6" FontSize="11" Margin="10 0"/>
+                                    <TextBlock Width="500" TextWrapping="Wrap" 
+                                               Text="{Binding Content}" Margin="10 0" />
+                                </StackPanel>
+                            </Grid>
+                            
+                        </ListViewItem>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+
+                </StackPanel>
+            </Grid>
+            
+        </Grid>
+
+
+    </Grid>
+</Window>

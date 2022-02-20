@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_news_Androind.View.DangKy">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Image Source="logoSETHUST.png" 
+               WidthRequest="120" 
+               />
+            <Entry Placeholder="Name"></Entry>
+            <Entry Placeholder="Email"></Entry>
+            <Entry Placeholder="Password" IsPassword="True"></Entry>
+            <Entry Placeholder="Confirm Password" IsPassword="True"></Entry>
+            <Button Text="Choose Image"/>
+            <Button Text="Đăng kí"></Button>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Đã có tài khoản? " TextColor="Blue"></Label>
+                <Label Text="Đăng nhập" TextColor="Blue"
+                       TextDecorations="Underline"
+                       ></Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
